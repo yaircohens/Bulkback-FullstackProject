@@ -26,6 +26,7 @@ passport.use(
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
         callbackURL: '/auth/google/callback',
+        proxy: true // Since using heroku, without this the google redirect uri will have a mismatch
       },
       (accessToken, refreshToken, profile, done) => {
         User.findOne({ googleId: profile.id })
