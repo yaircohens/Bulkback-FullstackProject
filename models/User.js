@@ -6,7 +6,9 @@ const { Schema } = mongoose;
 
 // Mongoose needs a Schema definition of optional values in document
 const userSchema = new Schema({
-  googleId: String
+  googleId: String,
+  name: String,
+  credits: { type: Number, default: 0 }
 });
 
 mongoose.model('users', userSchema);

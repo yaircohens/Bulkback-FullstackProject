@@ -12,7 +12,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// Checking if cookie (token) is valid with User.findBy(cookie) -promise - returns the user record
+// Checking if cookie (token) is valid with User.findBy(cookie) - a promise - returns the user record
 passport.deserializeUser((id, done) => {
   User.findById(id)
   .then(user => {
@@ -28,23 +28,43 @@ passport.use(
         callbackURL: '/auth/google/callback',
         proxy: true // Since using heroku, without this the google redirect uri will have a mismatch
       },
-      (accessToken, refreshToken, profile, done) => {
-        User.findOne({ googleId: profile.id })
-        .then(existingUser => {
-            if(existingUser) {
-              // Note: done function - first argument for catched error, second for the model instance that returned
-              // here the instance comes from .then(exsitingUser => ..) - end of User.findOne promise call
-              done(null, existingUser);
-            } else {
-              // Note: User (new User) & user (then.(user => )) are 2 mongoose model instances of the new created user
-              // Using the done function, we'll pass the user instance since it could be changed while being saved
-              // therefore this could be a more updated instance,
-              // since it comes from .then() - end of new.User promise call
-              new User({ googleId: profile.id })
-              .save()
-              .then(user => done(null, user));
-            }
-          });
+
+      // CODE VARIATION #1 - promises with .then() syntax
+
+      // (accessToken, refreshToken, profile, done) => {
+      //   User.findOne({ googleId: profile.id })
+      //   .then(existingUser => {
+      //       if (existingUser) {
+
+      //         // Note: done function - first argument for catched error, second for the model instance that returned
+      //         // here the instance comes from .then(exsitingUser => ..) - end of User.findOne promise call
+
+      //         done(null, existingUser);
+      //       } else {
+
+      //         // Note: User (new User) & user (then.(user => )) are 2 mongoose model instances of the new created user
+      //         // Using the done function, we'll pass the user instance since it could be changed while being saved
+      //         // therefore this could be a more updated instance,
+      //         // since it comes from .then() - end of new.User promise call
+
+      //         new User({ googleId: profile.id })
+      //         .save()
+      //         .then(user => done(null, user));
+      //       }
+      // }
+
+
+      // CODE VARITATION #2 - promises with async syntax
+      async (accessToken, refreshToken, profile, done) => {
+        const existingUser = await User.findOne({ googleId: profile.id })
+
+        if (existingUser) {
+          done(null, existingUser);
+        } else {
+          const user = await new User({ googleId: profile.id, name: profile.displayName }).save()
+          console.log(user);
+          done(null, user)
+        }
       }
     )
   );
