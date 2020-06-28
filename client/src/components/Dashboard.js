@@ -67,7 +67,7 @@ class Dashboard extends Component {
                             window.innerWidth <= 600 ?
                                 {marginLeft:'20px'} :
                                 {marginLeft:'160px'} :
-                                {marginLeft:'20px'}
+                                {marginLeft:'370px'}
                                 }>Dashboard</h3>
 
                     </div>
