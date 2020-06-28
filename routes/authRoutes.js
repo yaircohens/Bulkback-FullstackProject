@@ -1,8 +1,6 @@
-// Importing passport library
 const passport = require('passport');
 
-// Exporting as a function
-module.exports = (app) => {
+module.exports = app => {
   app.get(
     '/auth/google',
     passport.authenticate('google', {
@@ -15,7 +13,7 @@ module.exports = (app) => {
     passport.authenticate('google'),
     (req, res) => {
       res.redirect('/surveys');
-    }
+      }
     );
 
   app.get('/api/logout', (req, res) => {

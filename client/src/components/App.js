@@ -1,15 +1,13 @@
-// Manging React components and Routes
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import {connect } from 'react-redux'; // Used to connect Redux's Action Creators
+import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Header from './Header';
+import Footer from './Footer';
 import Landing from './Landing';
-
-const Dashboard = () => <h2>Dashboard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
-
+import Dashboard from './Dashboard';
+import SurveyNew from './Surveys/SurveyNew';
 
 class App extends Component {
 
@@ -19,19 +17,22 @@ class App extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div >
                 <BrowserRouter>
-                    <div>
+                    <div className="blue-grey darken-4">
                         <Header />
-                        <Route exact /* JSX Shortcut for exact={true} */ path="/" component={Landing} />
-                        <Route exact path="/surveys" component={Dashboard} />
-                        <Route path="/surveys/new" component={SurveyNew} />
+                        <div  className="container">
+                            <Route exact path="/" component={Landing} />
+                            <Route exact path="/surveys" component={Dashboard} loading={true} />
+                            <Route path="/surveys/new" component={SurveyNew} />
+                        </div>
+                        <Footer />
                     </div>
+
                 </BrowserRouter>
             </div>
         );
     }
 }
 
-// react-redux connect func assigning the actions to component's props
-export default connect(null/*MapStateToProps Arg*/, actions/*Actions to be connected*/)(App);
+export default connect(null, actions)(App);

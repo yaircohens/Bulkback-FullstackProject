@@ -1,9 +1,33 @@
 import React, { Component } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import * as actions from  '../actions';
 
 class Payments extends Component {
+
+    renderContent() {
+        switch(this.props.shape) {
+            case 'square':
+                return (
+                    <button href="" className="btn-small white-text text-lighten-4  deep-purple darken-1 darken-1">
+                        Add Credits
+                    </button>
+                    );
+            case 'round':
+                return (
+                    <div className="btn-floating btn-large pulse deep-purple">
+                        <i className="large material-icons">add</i>
+                    </div>
+                    );
+            default:
+                return (
+                <div className="btn-small white-text text-lighten-4  deep-purple darken-1 darken-1">
+                    Add Credits
+                </div>
+                );
+        }
+    };
+
     render() {
         return (
             <StripeCheckout
@@ -13,10 +37,11 @@ class Payments extends Component {
              token={ token => this.props.handleToken(token) }
              stripeKey={process.env.REACT_APP_STRIPE_KEY}
             >
-                <button className="waves-effect waves-light btn-small white-text text-lighten-4">Add Credits</button>
+            {this.renderContent()}
             </StripeCheckout>
         );
     }
 }
+
 
 export default connect(null, actions)(Payments);
