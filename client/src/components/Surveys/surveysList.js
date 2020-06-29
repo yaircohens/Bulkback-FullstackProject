@@ -10,11 +10,12 @@ class SurveyList extends Component {
 
 
     renderSurveys() {
+        console.log(this.props.surveys);
         return this.props.surveys.reverse().map(survey => {
             return (
                 <div className="col s12 m6 l4">
                     <div className="card grey darken-4" key={survey._id}>
-                        <div className="card-image waves-effect waves-block waves-light" >
+                        <div className="card-image waves-effect waves-block waves-light">
                             <img alt="survey-illustration" className="activator" src="assets/survey-illus.svg" />
                         </div>
                         <div className="card-content">

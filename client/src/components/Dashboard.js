@@ -58,18 +58,11 @@ class Dashboard extends Component {
     render() {
         return (
             <div style={{minHeight: '70vh'}}>
-                    <div style={{display:'flex'}}>
-                        <div style={{marginTop:'20px'}}>
+                    <div style={{display:'flex', justifyContent:'center', alignItems:'center', paddingRight:'35px'}}>
+                        <div>
                         <InstructionsModal size='small' />
                         </div>
-                        <h3 className="white-text" style={
-                            window.innerWidth <= 1024 ?
-                            window.innerWidth <= 600 ?
-                                {marginLeft:'20px'} :
-                                {marginLeft:'160px'} :
-                                {marginLeft:'370px'}
-                                }>Dashboard</h3>
-
+                        <h3 className="white-text" >Dashboard</h3>
                     </div>
                     {this.renderContent()}
 

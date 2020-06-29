@@ -58,7 +58,7 @@ class Header extends Component {
         return(
              window.innerWidth > 1024 ? (
                 <React.Fragment>
-                    <nav className="grey darken-4"style={{height: '100px',  paddingTop:'5px'}}>
+                    <nav className="black"style={{height: '100px',  paddingTop:'5px'}}>
                         <div className="container" style={{paddingTop:'10px'}}>
                             <Link
                             to={ this.props.auth ? '/surveys' : '/'}

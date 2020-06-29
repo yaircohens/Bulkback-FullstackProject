@@ -15,7 +15,7 @@ class InstructionsModal extends Component {
                 return(
                 <div>
                     <a className=" btn-flat modal-trigger" href="#instructions">
-                       <i className="tiny white-text material-icons center ">info_outline</i>
+                       <i className="large material-icons green-text accent-4  center">info_outline</i>
                     </a>
                 </div>
                 );
