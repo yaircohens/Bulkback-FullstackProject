@@ -10,7 +10,6 @@ class SurveyList extends Component {
 
 
     renderSurveys() {
-        console.log(this.props.surveys);
         return this.props.surveys.reverse().map(survey => {
             return (
                 <div className="col s12 m6 l4">
